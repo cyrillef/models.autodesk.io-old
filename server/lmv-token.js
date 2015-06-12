@@ -21,21 +21,16 @@
 var express =require ('express') ;
 var request =require ('request') ;
 var unirest =require('unirest') ;
-var credentials =require ('./credentials') ;
+var config =require ('./credentials') ;
 
 var router =express.Router () ;
 
 router.get ('/token', function (req, res) {
-	var creds =new credentials () ;
-	var params ={
-		client_id: req.params.key,
-		client_secret: req.params.secret,
-		grant_type: 'client_credentials'
-	} ;
-	unirest.post (creds.AuthenticateUrl)
+	config.credentials.client_id =req.query.key ;
+	config.credentials.client_secret= req.query.secret ;
+	unirest.post (config.AuthenticateEndPoint)
 		.header ('Accept', 'application/json')
-		.type ('application/x-www-form-urlencoded')
-		.send (params)
+		.send (config.credentials)
 		.end (function (response) {
 			if ( response.statusCode != 200 )
 				return (res.status (500).end ()) ;
@@ -45,16 +40,11 @@ router.get ('/token', function (req, res) {
 }) ;
 
 router.post ('/token', function (req, res) {
-	var creds =new credentials () ;
-	var params ={
-		client_id: req.body.key,
-		client_secret: req.body.secret,
-		grant_type: 'client_credentials'
-	} ;
-	unirest.post (creds.AuthenticateUrl)
+	config.credentials.client_id =req.body.key ;
+	config.credentials.client_secret= req.body.secret ;
+	unirest.post (config.AuthenticateEndPoint)
 		.header ('Accept', 'application/json')
-		.type ('application/x-www-form-urlencoded')
-		.send (params)
+		.send (config.credentials)
 		.end (function (response) {
 			if ( response.statusCode != 200 )
 				return (res.status (500).end ()) ;

@@ -145,7 +145,7 @@ function translate (filename) {
 		url: '/api/translate',
 		type: 'post',
 		timeout: 0,
-		data: JSON.stringify ({ 'accessToken': accessToken, 'file': filename }),
+		data: JSON.stringify ({ 'accessToken': accessToken.access_token, 'file': filename }),
 		contentType: 'application/json',
 		complete: null
 	}).done (function (data) {

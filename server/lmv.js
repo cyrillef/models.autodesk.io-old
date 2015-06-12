@@ -26,13 +26,12 @@ var events =require('events') ;
 var util =require ('util') ;
 var path =require ('path') ;
 var fs =require ('fs') ;
-var credentials =require ('./credentials') ;
+var config =require ('./credentials') ;
 
 function Lmv (bucketName, accessToken) {
 	events.EventEmitter.call (this) ;
 	this.bucket =bucketName ;
-	this.creds =new credentials () ;
-	this.creds.accessToken =accessToken ;
+	this.accessToken =accessToken ;
 }
 //Lmv.prototype.__proto__ =events.EventEmitter.prototype ;
 util.inherits (Lmv, events.EventEmitter) ;
@@ -40,16 +39,16 @@ util.inherits (Lmv, events.EventEmitter) ;
 // GET /oss/v1/buckets/:bucket/details
 Lmv.prototype.checkBucket =function () {
 	var self =this ;
-	unirest.get (self.creds.BaseUrl + '/oss/v1/buckets/' + self.bucket + '/details')
+	unirest.get (util.format (config.getBucketsDetailsEndPoint, self.bucket))
 		.header ('Accept', 'application/json')
 		.header ('Content-Type', 'application/json')
-		.header ('Authorization', 'Bearer ' + self.creds.accessToken)
+		.header ('Authorization', 'Bearer ' + self.accessToken)
 		//.query (params)
 		.end (function (response) {
 			try {
 				if ( response.statusCode != 200 )
 					throw response ;
-				self.emit ('success', response.raw_body) ;
+				try { self.emit ('success', response.body) ; } catch ( err ) {}
 			} catch ( err ) {
 				self.emit ('fail', err) ;
 			}
@@ -62,16 +61,16 @@ Lmv.prototype.checkBucket =function () {
 Lmv.prototype.createBucket =function (policy) {
 	policy =policy || 'transient' ;
 	var self =this ;
-	unirest.post (self.creds.BaseUrl + '/oss/v1/buckets')
+	unirest.post (config.postBucketsEndPoint)
 		.header ('Accept', 'application/json')
 		.header ('Content-Type', 'application/json')
-		.header ('Authorization', 'Bearer ' + self.creds.accessToken)
+		.header ('Authorization', 'Bearer ' + self.accessToken)
 		.send ({ 'bucketKey': self.bucket, 'policy': policy })
 		.end (function (response) {
 			try {
-				if ( response.statusCode != 200 || !response.raw_body.hasOwnProperty ('key') )
+				if ( response.statusCode != 200 || !response.body.hasOwnProperty ('key') )
 					throw response ;
-				self.emit ('success', response.raw_body) ;
+				try { self.emit ('success', response.body) ; } catch ( err ) {}
 			} catch ( err ) {
 				self.emit ('fail', err) ;
 			}
@@ -84,35 +83,29 @@ Lmv.prototype.createBucketIfNotExist =function (policy) {
 	policy =policy || 'transient' ;
 	var self =this ;
 
-	unirest.get (self.creds.BaseUrl + '/oss/v1/buckets/' + self.bucket + '/details')
+	unirest.get (util.format (config.getBucketsDetailsEndPoint, self.bucket))
 		.header ('Accept', 'application/json')
 		.header ('Content-Type', 'application/json')
-		.header ('Authorization', 'Bearer ' + self.creds.accessToken)
+		.header ('Authorization', 'Bearer ' + self.accessToken)
 		//.query (params)
 		.end (function (response) {
 			try {
 				if ( response.statusCode != 200 )
 					throw response ;
-				try {
-					self.emit ('success', response.raw_body) ;
-				} catch ( err ) {
-				}
+				try { self.emit ('success', response.body) ; } catch ( err ) {}
 			} catch ( err ) {
 				//- We need to create one if error == 404 (404 Not Found)
 				if ( Number.isInteger (err.statusCode) && err.statusCode == 404 ) {
-					unirest.post (self.creds.BaseUrl + '/oss/v1/buckets')
+					unirest.post (config.postBucketsEndPoint)
 						.header ('Accept', 'application/json')
 						.header ('Content-Type', 'application/json')
-						.header ('Authorization', 'Bearer ' + self.creds.accessToken)
+						.header ('Authorization', 'Bearer ' + self.accessToken)
 						.send ({ 'bucketKey': self.bucket, 'policy': policy })
 						.end (function (response) {
 							try {
-								if ( response.statusCode != 200 || !response.raw_body.hasOwnProperty ('key') )
+								if ( response.statusCode != 200 || !response.body.hasOwnProperty ('key') )
 									throw response ;
-								try {
-									self.emit ('success', response.raw_body) ;
-								} catch ( err ) {
-								}
+								try { self.emit ('success', response.body) ; } catch ( err ) {}
 							} catch ( err ) {
 								self.emit ('fail', err) ;
 							}
@@ -137,22 +130,19 @@ Lmv.prototype.uploadFile =function (filename) {
 		if ( err )
 			return (self.emit ('fail', err)) ;
 
-		var endpoint ='/oss/v1/buckets/' + self.bucket + '/objects/' + localFile.replace (/ /g, '+') ;
-		unirest.put (self.creds.BaseUrl + endpoint)
+		var endpoint =util.format (config.getputFileUploadEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
+		unirest.put (endpoint)
 			.headers ({
 				'Accept': 'application/json',
 				'Content-Type': 'application/octet-stream',
-				'Authorization': ('Bearer ' + self.creds.accessToken)
+				'Authorization': ('Bearer ' + self.accessToken)
 			})
 			.send (data)
 			.end (function (response) {
 				try {
 					if ( response.statusCode != 200 )
 						throw response ;
-					try {
-						self.emit ('success', response.raw_body) ;
-					} catch ( err ) {
-					}
+					try { self.emit ('success', response.body) ; } catch ( err ) {}
 				} catch ( err ) {
 					self.emit ('fail', err) ;
 				}
@@ -168,21 +158,18 @@ Lmv.prototype.register =function (urn) {
 	//var urn =this.getURN (connections ['lmv-root'] [0]) ;
 	var desc ={ 'urn': new Buffer (urn).toString ('base64') } ;
 
-	unirest.post (self.creds.BaseUrl + '/viewingservice/v1/register')
+	unirest.post (config.postRegisterEndPoint)
 		.headers ({
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
-			'Authorization': ('Bearer ' + self.creds.accessToken)
+			'Authorization': ('Bearer ' + self.accessToken)
 		})
 		.send (desc)
 		.end (function (response) {
 			try {
 				if ( response.statusCode != 200 && response.statusCode != 201 )
 					throw response ;
-				try {
-					self.emit ('success', { 'urn': desc.urn, 'response': response.body }) ;
-				} catch ( err ) {
-				}
+				try { self.emit ('success', { 'urn': desc.urn, 'response': response.body }) ; } catch ( err ) {}
 			} catch ( err ) {
 				self.emit ('fail', err) ;
 			}
@@ -195,22 +182,19 @@ Lmv.prototype.status =function (urn, params) {
 	var self =this ;
 	params =params || {} ;
 
-	var endpoint ='/viewingservice/v1/' + urn + '/status' ;
-	unirest.get (self.creds.BaseUrl + endpoint)
+	var endpoint =util.format (config.getStatusEndPoint, urn) ;
+	unirest.get (endpoint)
 		.headers ({
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
-			'Authorization': ('Bearer ' + self.creds.accessToken)
+			'Authorization': ('Bearer ' + self.accessToken)
 		})
 		.query (params)
 		.end (function (response) {
 			try {
 				if ( response.statusCode != 200 )
 					throw response ;
-				try {
-					self.emit ('success', response.body) ;
-				} catch ( err ) {
-				}
+				try { self.emit ('success', response.body) ; } catch ( err ) {}
 			} catch ( err ) {
 				self.emit ('fail', err) ;
 			}

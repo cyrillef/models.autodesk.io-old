@@ -18,13 +18,24 @@
 // DOES NOT WARRANT THAT THE OPERATION OF THE PROGRAM WILL BE
 // UNINTERRUPTED OR ERROR FREE.
 //
+var express =require ('express') ;
+var request =require ('request') ;
+var bodyParser =require ('body-parser') ;
+var favicon =require ('serve-favicon') ;
+var lmvToken =require ('./lmv-token') ;
+var lmvProjects =require ('./lmv-projects') ;
+var lmvFile =require ('./lmv-file') ;
 
-// To avoid the EXDEV rename error, see http://stackoverflow.com/q/21071303/76173
-process.env.TMPDIR ='uploads' ;
-//process.env ['NODE_TLS_REJECT_UNAUTHORIZED'] ='0' ; // Ignore 'UNABLE_TO_VERIFY_LEAF_SIGNATURE' authorization error
+// http://garann.github.io/template-chooser/
+var app =express () ;
+//app.use (bodyParser.urlencoded ({ extended: false })) ;
+app.use (bodyParser.json ()) ;
+app.use (express.static (__dirname + '/../www')) ;
+app.use (favicon (__dirname + '/../www/images/favicon.ico')) ;
+app.use ('/api', lmvToken) ;
+app.use ('/api', lmvProjects) ;
+app.use ('/api', lmvFile) ;
 
-var app =require ('./server/server') ;
+app.set ('port', process.env.PORT || 3000) ;
 
-var server =app.listen (app.get ('port'), function () {
-    console.log ('Server listening on port ' + server.address ().port) ;
-}) ;
+module.exports =app ;

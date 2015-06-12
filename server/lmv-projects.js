@@ -47,13 +47,13 @@ router.post ('/translate', function (req, res) {
 	var bucket =
 		  'model'
 		+ new Date ().toISOString ().replace (/T/, '-').replace (/:+/g, '-').replace (/\..+/, '')
-		+ '-' + accessToken.access_token.toLowerCase ().replace (/\W+/g, '') ;
+		+ '-' + accessToken.toLowerCase ().replace (/\W+/g, '') ;
 	var policy ='transient' ;
 
 	async.waterfall ([
 		function (callbacks1) {
 			console.log ('createBucketIfNotExist') ;
-			new lmv.Lmv (bucket, accessToken.access_token).createBucketIfNotExist (policy)
+			new lmv.Lmv (bucket, accessToken).createBucketIfNotExist (policy)
 				.on ('success', function (data) {
 					console.log ('Bucket already or now exist!') ;
 					callbacks1 (null, data) ;
@@ -67,7 +67,7 @@ router.post ('/translate', function (req, res) {
 
 		function (arg1, callbacks2) {
 			console.log ('async upload') ;
-			new lmv.Lmv (bucket, accessToken.access_token).uploadFile (filename)
+			new lmv.Lmv (bucket, accessToken).uploadFile (filename)
 				.on ('success', function (data) {
 					console.log (filename + ' uploaded.') ;
 					callbacks2 (null, data) ;
@@ -81,8 +81,8 @@ router.post ('/translate', function (req, res) {
 
 		function (arg1, callbacks3) {
 			console.log ('Launching translation') ;
-			var urn =JSON.parse (arg1).objects [0].id ;
-			new lmv.Lmv (bucket, accessToken.access_token).register (urn)
+			var urn =arg1.objects [0].id ;
+			new lmv.Lmv (bucket, accessToken).register (urn)
 				.on ('success', function (data) {
 					console.log ('Translation requested.') ;
 					callbacks3 (null, data) ;
@@ -98,7 +98,7 @@ router.post ('/translate', function (req, res) {
 		if ( err != null ) {
 			if ( err.hasOwnProperty ('statusCode') && err.statusCode != 200 )
 				return (res.status (err.statusCode).send (err.body.reason)) ;
-			if ( !err.raw_body.hasOwnProperty ('key') )
+			if ( err.hasOwnProperty ('body') && !err.body.hasOwnProperty ('key') )
 				return (res.status (500).send ('The server did not return a valid key')) ;
 			return (res.status (500).send ('An unknown error occurred!')) ;
 		}
