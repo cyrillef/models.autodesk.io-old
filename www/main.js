@@ -197,13 +197,20 @@ function translateProgress (urn) {
 function translatedItem (id, name, urn) {
 	$('#translated').append ('<div class="list-group-item row" id="' + id + '">'
 		+ '<div class="col-md-3">' + name + '</div>'
-		+ '<div class="col-md-8">'
+		+ '<div class="col-md-7">'
 		+ '<input type="text" class="form-control" value="' + urn + '" readonly="true" />'
 		+ '</div>'
 		+ '<div class="col-md-1">'
 		+ '<button class="form-control copy" data-clipboard-text="' + urn + '" title="Copy the URN to clipboard"><img src="/images/copy.png" /></button>'
-		+ '</div>'
+        + '</div>'
+        + '<div class="col-md-1">'
+        + '<button class="form-control view-result" data-clipboard-text="' + urn + '" title="View result"><img src="/images/view.png" /></button>'
+        + '</div>'
 	) ;
 	var client =new ZeroClipboard ($('#' + id + ' div button.copy')) ;
+    $('#' + id + ' div button.view-result').click (function (e) {
+        var windowName =$(this).attr ('data-clipboard-text') ;
+        window.open ('/view.html?urn=' + encodeURIComponent (windowName) + '&token=' + encodeURIComponent ($('#accessToken').val ()), windowName, "height=768,width=1024") ;
+    }) ;
 }
 

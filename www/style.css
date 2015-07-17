@@ -31,11 +31,11 @@ footer {
 	float: left;
 	margin-right: 20px;
 }
-.copy {
+.copy, .view-result {
 	width: 32px;
 	height: 32px;
 }
-.copy img {
+.copy img, .view-result img {
 	margin-top: -2px;
 	margin-left: -8px;
 	width: 24px;
