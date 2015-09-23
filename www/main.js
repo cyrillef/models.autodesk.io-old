@@ -160,7 +160,7 @@ function translate (filename) {
 		setTimeout (function () { translateProgress (data.urn) ; }, 5000) ;
 	}).fail (function (xhr, ajaxOptions, thrownError) {
 		$('#modal-translationfailed').modal ('show') ;
-	}) ; ;
+	}) ;
 }
 
 function translateProgress (urn) {

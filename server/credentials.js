@@ -34,7 +34,9 @@ config.AuthenticateEndPoint =config.BaseEndPoint + '/authentication/' + config.V
 
 config.getBucketsDetailsEndPoint =config.BaseEndPoint + '/oss/' + config.Version + '/buckets/%s/details' ;
 config.postBucketsEndPoint =config.BaseEndPoint + '/oss/' + config.Version + '/buckets' ;
-config.getputFileUploadEndPoint =config.BaseEndPoint + '/oss/' + config.Version + '/buckets/%s/objects/%s' ;
+config.putFileUploadEndPoint =config.BaseEndPoint + '/oss/' + config.Version + '/buckets/%s/objects/%s' ;
+config.putFileUploadResumableEndPoint =config.BaseEndPoint + '/oss/' + config.Version + '/buckets/%s/objects/%s/resumable' ;
+config.fileResumableChunk =40 ; // in Mb
 config.getFileDetailsEndPoint =config.BaseEndPoint + '/oss/' + config.Version + '/buckets/%s/objects/%s/details' ;
 
 config.postSetReferencesEndPoint =config.BaseEndPoint + '/references/' + config.Version + '/setreference' ;

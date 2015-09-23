@@ -22,10 +22,12 @@ var express =require ('express') ;
 var request =require ('request') ;
 // unirest (http://unirest.io/) or SuperAgent (http://visionmedia.github.io/superagent/)
 var unirest =require('unirest') ;
+var async =require ('async') ;
 var events =require('events') ;
 var util =require ('util') ;
 var path =require ('path') ;
 var fs =require ('fs') ;
+var uid =require ('gen-uid') ;
 var config =require ('./credentials') ;
 
 function Lmv (bucketName, accessToken) {
@@ -120,8 +122,28 @@ Lmv.prototype.createBucketIfNotExist =function (policy) {
 	return (this) ;
 } ;
 
-// PUT /oss/v1/buckets/:bucket/objects/:filename
+// upload entry point - will decide to use singleUpload or resumableUpload based on file size
 Lmv.prototype.uploadFile =function (filename) {
+	var self =this ;
+	var serverFile =path.normalize (__dirname + '/../' + filename) ;
+	var localFile =path.basename (filename) ;
+
+	fs.stat (serverFile, function (err, stats) {
+		if ( err )
+			return (self.emit ('fail', err)) ;
+		var total =stats.size ;
+		var chunkSize =config.fileResumableChunk * 1024 * 1024 ;
+		if ( total <= chunkSize )
+			self.singleUpload (filename) ;
+		else
+			self.resumableUpload (filename) ;
+	}) ;
+
+	return (this) ;
+} ;
+
+// PUT /oss/v1/buckets/:bucket/objects/:filename
+Lmv.prototype.singleUpload =function (filename) {
 	var self =this ;
 	var serverFile =path.normalize (__dirname + '/../' + filename) ;
 	var localFile =path.basename (filename) ;
@@ -130,7 +152,7 @@ Lmv.prototype.uploadFile =function (filename) {
 		if ( err )
 			return (self.emit ('fail', err)) ;
 
-		var endpoint =util.format (config.getputFileUploadEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
+		var endpoint =util.format (config.putFileUploadEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
 		unirest.put (endpoint)
 			.headers ({
 				'Accept': 'application/json',
@@ -149,6 +171,82 @@ Lmv.prototype.uploadFile =function (filename) {
 			})
 		;
 	}) ;
+	return (this) ;
+} ;
+
+// PUT /oss/v1/buckets/:bucket/objects/:filename/resumable
+Lmv.prototype.resumableUpload =function (filename) {
+	var self =this ;
+	var serverFile =path.normalize (__dirname + '/../' + filename) ;
+	var localFile =path.basename (filename) ;
+
+	fs.stat (serverFile, function (err, stats) {
+		if ( err )
+			return (self.emit ('fail', err)) ;
+		var total =stats.size ;
+		var chunkSize =config.fileResumableChunk * 1024 * 1024 ;
+		var nbChunks =Math.round (0.5 + total / chunkSize) ;
+		var endpoint =util.format (config.putFileUploadResumableEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
+		var sessionId ='models-autodesk-io-' + uid.token () ;
+
+		var fctChunks =function (n, chunkSize) {
+			return (function (callback) {
+				fs.open (serverFile, 'r', function (err, fd) {
+					if ( err )
+						return (callback (err, null)) ;
+					var buffer =new Buffer (chunkSize) ;
+					fs.read (fd, buffer, 0, chunkSize, n * chunkSize, function (err, bytesRead, buff) {
+						var contentRange ='bytes '
+							+ (n * chunkSize) + '-'
+							+ (n * chunkSize + bytesRead - 1) + '/'
+							+ total ;
+						unirest.put (endpoint)
+							.headers ({
+								'Accept': 'application/json',
+								'Content-Type': 'application/octet-stream',
+								'Authorization': ('Bearer ' + self.accessToken),
+								'Content-Range': contentRange,
+								'Session-Id': sessionId
+							})
+							.send (buff.slice (0, bytesRead))
+							.end (function (response) {
+								try {
+									if ( response.statusCode != 200 && response.statusCode != 202 )
+										throw response ;
+									callback (null, response.body) ;
+								} catch ( err ) {
+									callback (err, null) ;
+								}
+							})
+						;
+					}) ;
+				}) ;
+			}) ;
+		} ;
+
+		var fctChunksArray =Array.apply (null, { length: nbChunks }).map (Number.call, Number) ;
+		for ( var i =0 ; i < fctChunksArray.length ; i++ )
+			fctChunksArray [i] =fctChunks (i, chunkSize) ;
+		async.parallelLimit (
+			fctChunksArray,
+			10,
+			function (err, results) {
+				if ( err )
+					return (self.emit ('fail', err)) ;
+				try {
+					for ( var i =0 ; i < results.length ; i++ ) {
+						if ( results [i] ) {
+							self.emit ('success', results [i]) ;
+							break ;
+						}
+					}
+				} catch ( err ) {
+				}
+			}
+		) ;
+
+	}) ;
+
 	return (this) ;
 } ;
 
@@ -217,5 +315,38 @@ if ( !Number.isInteger ) {
 			&& nVal < 9007199254740992
 			&& Math.floor (nVal) === nVal
 		) ;
+	} ;
+}
+
+// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/fill
+if ( !Array.prototype.fill ) {
+	Array.prototype.fill =function (value) {
+		// Steps 1-2.
+		if ( this == null )
+			throw new TypeError ('this is null or not defined') ;
+		var O =Object (this) ;
+		// Steps 3-5.
+		var len =O.length >>> 0 ;
+		// Steps 6-7.
+		var start =arguments [1] ;
+		var relativeStart =start >> 0 ;
+		// Step 8.
+		var k =relativeStart < 0 ?
+			Math.max (len + relativeStart, 0) :
+			Math.min (relativeStart, len) ;
+		// Steps 9-10.
+		var end =arguments [2] ;
+		var relativeEnd =end === undefined ? len : end >> 0 ;
+		// Step 11.
+		var final =relativeEnd < 0 ?
+			Math.max (len + relativeEnd, 0) :
+			Math.min (relativeEnd, len) ;
+		// Step 12.
+		while ( k < final ) {
+			O [k] =value ;
+			k++ ;
+		}
+		// Step 13.
+		return (O) ;
 	} ;
 }
