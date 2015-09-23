@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f39dad5e-5928-4e01-8139-8e72a306e21b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/main.js" afterPath="$PROJECT_DIR$/www/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/style.css" afterPath="$PROJECT_DIR$/www/style.css" />
+    <list default="true" id="f39dad5e-5928-4e01-8139-8e72a306e21b" name="Default" comment="Adding resumable upload option">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/lmv.js" afterPath="$PROJECT_DIR$/server/lmv.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="workflow-node.js-host-view.and.data.api.iws" />
@@ -28,56 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/index.html">
+      <file leaf-file-name="credentials.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server/credentials.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.25" vertical-offset="2220" max-vertical-offset="3435">
-              <caret line="166" column="81" selection-start-line="166" selection-start-column="70" selection-end-line="166" selection-end-column="81" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1371" max-vertical-offset="2025">
-              <caret line="212" column="132" selection-start-line="212" selection-start-column="132" selection-end-line="212" selection-end-column="132" />
-              <folding>
-                <element signature="n#!!block;n#HostResetAccessToken#0" expanded="false" />
-                <element signature="n#!!block;n#HostSetupTranslated#0" expanded="false" />
-                <element signature="n#!!block;n#translate#0" expanded="false" />
-                <element signature="n#!!block;n#translateProgress#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/view.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.34146342" vertical-offset="960" max-vertical-offset="2070">
-              <caret line="78" column="28" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/view.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="426" max-vertical-offset="1125">
-              <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="3000">
-              <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.36363637" vertical-offset="0" max-vertical-offset="748">
+              <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -93,19 +47,19 @@
       <list>
         <option value="$PROJECT_DIR$/www/images/.gitignore" />
         <option value="$PROJECT_DIR$/www/js/flipclock.css" />
-        <option value="$PROJECT_DIR$/server/credentials.js" />
         <option value="$PROJECT_DIR$/start.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/server/lmv-token.js" />
-        <option value="$PROJECT_DIR$/server/lmv.js" />
-        <option value="$PROJECT_DIR$/server/lmv-projects.js" />
         <option value="$PROJECT_DIR$/server/server.js" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/style.css" />
         <option value="$PROJECT_DIR$/www/view.css" />
-        <option value="$PROJECT_DIR$/www/main.js" />
         <option value="$PROJECT_DIR$/www/view.html" />
+        <option value="$PROJECT_DIR$/www/main.js" />
+        <option value="$PROJECT_DIR$/www/index.html" />
+        <option value="$PROJECT_DIR$/server/lmv-projects.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/server/lmv.js" />
+        <option value="$PROJECT_DIR$/server/credentials.js" />
       </list>
     </option>
   </component>
@@ -113,10 +67,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="402" />
-    <option name="y" value="47" />
-    <option name="width" value="1401" />
-    <option name="height" value="1008" />
+    <option name="x" value="634" />
+    <option name="y" value="117" />
+    <option name="width" value="1701" />
+    <option name="height" value="1252" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -141,7 +95,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -188,8 +141,23 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workflow-node.js-host-view.and.data.api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="workflow-node.js-host-view.and.data.api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -198,17 +166,14 @@
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="C:/Program Files/nodejs/node.exe" />
+    <property name="editorconfig.notification" value="Applied .editorconfig settings" />
   </component>
   <component name="RunManager" selected="Node.js.start.js">
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
-      <method />
-    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -216,6 +181,10 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -239,7 +208,7 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="start.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="/usr/local/bin/node" path-to-js-file="start.js" working-dir="$PROJECT_DIR$">
+    <configuration default="false" name="start.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="start.js" working-dir="$PROJECT_DIR$">
       <RunnerSettings RunnerId="Basic" />
       <RunnerSettings RunnerId="debuggableProgram" />
       <ConfigurationWrapper RunnerId="Basic" />
@@ -261,21 +230,35 @@
       <option name="number" value="Default" />
       <updated>1429452075259</updated>
     </task>
+    <task id="LOCAL-00001" summary="Adding resumable upload option">
+      <created>1443015948755</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1443015948755</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Adding resumable upload option">
+      <created>1443016143658</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1443016143658</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="402" y="47" width="1401" height="1008" extended-state="0" />
-    <editor active="true" />
+    <frame x="634" y="117" width="1701" height="1252" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917038" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294643" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22412562" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27582535" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18586227" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30714285" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917038" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -303,14 +286,50 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="Adding resumable upload option" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding resumable upload option" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="103" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="148" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/www/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3893">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2074" max-vertical-offset="2176">
+          <caret line="209" column="0" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
+          <folding>
+            <element signature="e#894#3256#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#HostResetAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupTranslated#0" expanded="false" />
+            <element signature="n#!!block;n#translateProgress#0" expanded="false" />
+            <element signature="n#!!block;n#translatedItem#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="3400">
+          <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2715">
@@ -338,7 +357,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="3332">
           <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#894#3256#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#HostResetAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupTranslated#0" expanded="false" />
+            <element signature="n#!!block;n#translateProgress#0" expanded="false" />
+            <element signature="n#!!block;n#translatedItem#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -347,14 +373,11 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="3808">
           <caret line="52" column="29" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
           <folding>
-            <element signature="n#!!block;n#Lmv#0" expanded="false" />
-            <element signature="e#1468#1978#0" expanded="false" />
-            <element signature="e#2052#2641#0" expanded="false" />
-            <element signature="e#2701#3977#0" expanded="false" />
-            <element signature="e#4076#4886#0" expanded="false" />
-            <element signature="e#5160#5288#0" expanded="false" />
-            <element signature="e#6321#6540#0" expanded="false" />
-            <element signature="e#6368#6536#0" expanded="false" />
+            <element signature="e#1530#2040#0" expanded="false" />
+            <element signature="e#2114#2703#0" expanded="false" />
+            <element signature="e#2763#4039#0" expanded="false" />
+            <element signature="e#9828#10480#0" expanded="false" />
+            <element signature="e#10529#11068#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -387,7 +410,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="3332">
           <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#894#3256#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#HostResetAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupTranslated#0" expanded="false" />
+            <element signature="n#!!block;n#translateProgress#0" expanded="false" />
+            <element signature="n#!!block;n#translatedItem#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -396,14 +426,11 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="3808">
           <caret line="52" column="29" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
           <folding>
-            <element signature="n#!!block;n#Lmv#0" expanded="false" />
-            <element signature="e#1468#1978#0" expanded="false" />
-            <element signature="e#2052#2641#0" expanded="false" />
-            <element signature="e#2701#3977#0" expanded="false" />
-            <element signature="e#4076#4886#0" expanded="false" />
-            <element signature="e#5160#5288#0" expanded="false" />
-            <element signature="e#6321#6540#0" expanded="false" />
-            <element signature="e#6368#6536#0" expanded="false" />
+            <element signature="e#1530#2040#0" expanded="false" />
+            <element signature="e#2114#2703#0" expanded="false" />
+            <element signature="e#2763#4039#0" expanded="false" />
+            <element signature="e#9828#10480#0" expanded="false" />
+            <element signature="e#10529#11068#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -436,7 +463,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3332">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#894#3256#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#HostResetAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupTranslated#0" expanded="false" />
+            <element signature="n#!!block;n#translateProgress#0" expanded="false" />
+            <element signature="n#!!block;n#translatedItem#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -460,7 +494,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3332">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#894#3256#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#HostResetAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupTranslated#0" expanded="false" />
+            <element signature="n#!!block;n#translateProgress#0" expanded="false" />
+            <element signature="n#!!block;n#translatedItem#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -507,7 +548,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2035" max-vertical-offset="2567">
           <caret line="140" column="12" selection-start-line="140" selection-start-column="12" selection-end-line="140" selection-end-column="12" />
-          <folding />
+          <folding>
+            <element signature="e#894#3256#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#HostResetAccessToken#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupTranslated#0" expanded="false" />
+            <element signature="n#!!block;n#translateProgress#0" expanded="false" />
+            <element signature="n#!!block;n#translatedItem#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -529,22 +577,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="904">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/lmv-file.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/lmv-projects.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31881532" vertical-offset="1177" max-vertical-offset="1751">
-          <caret line="99" column="4" selection-start-line="99" selection-start-column="4" selection-end-line="99" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -586,16 +618,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/www/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.89483064" vertical-offset="365" max-vertical-offset="1139">
-          <caret line="51" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="3400">
+          <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58" vertical-offset="205" max-vertical-offset="705">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
           <caret line="33" column="62" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -603,72 +636,90 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/lmv.js">
+    <entry file="file://$PROJECT_DIR$/server/lmv-file.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75" vertical-offset="210" max-vertical-offset="1275">
-          <caret line="171" column="31" selection-start-line="171" selection-start-column="22" selection-end-line="171" selection-end-column="31" />
-          <folding>
-            <element signature="n#!!block;n#Lmv#0" expanded="false" />
-            <element signature="e#1468#1978#0" expanded="false" />
-            <element signature="e#2052#2641#0" expanded="false" />
-            <element signature="e#2701#3977#0" expanded="false" />
-            <element signature="e#4076#4886#0" expanded="false" />
-            <element signature="e#5160#5288#0" expanded="false" />
-            <element signature="e#6321#6540#0" expanded="false" />
-            <element signature="e#6368#6536#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/credentials.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45" vertical-offset="0" max-vertical-offset="525">
-          <caret line="34" column="32" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="3000">
-          <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.25" vertical-offset="2220" max-vertical-offset="3435">
-          <caret line="166" column="81" selection-start-line="166" selection-start-column="70" selection-end-line="166" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/view.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="426" max-vertical-offset="1125">
-          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1371" max-vertical-offset="2025">
-          <caret line="212" column="132" selection-start-line="212" selection-start-column="132" selection-end-line="212" selection-end-column="132" />
+        <state vertical-scroll-proportion="0.7294398" vertical-offset="0" max-vertical-offset="839">
+          <caret line="162" column="8" selection-start-line="162" selection-start-column="8" selection-end-line="162" selection-end-column="8" />
           <folding>
+            <element signature="e#894#3256#0" expanded="false" />
+            <element signature="n#!!block;n#HostSetupAccessToken#0" expanded="false" />
             <element signature="n#!!block;n#HostResetAccessToken#0" expanded="false" />
             <element signature="n#!!block;n#HostSetupTranslated#0" expanded="false" />
-            <element signature="n#!!block;n#translate#0" expanded="false" />
             <element signature="n#!!block;n#translateProgress#0" expanded="false" />
+            <element signature="n#!!block;n#translatedItem#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/view.html">
+    <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34146342" vertical-offset="960" max-vertical-offset="2070">
-          <caret line="78" column="28" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
+        <state vertical-scroll-proportion="-11.115385" vertical-offset="765" max-vertical-offset="3893">
+          <caret line="62" column="41" selection-start-line="62" selection-start-column="41" selection-end-line="62" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23242468" vertical-offset="365" max-vertical-offset="1156">
+          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/unirest/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="100.27586" vertical-offset="2908" max-vertical-offset="16456">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#1799#2242#0" expanded="false" />
+            <element signature="e#2368#2429#0" expanded="false" />
+            <element signature="e#2673#2732#0" expanded="false" />
+            <element signature="e#2960#3086#0" expanded="false" />
+            <element signature="e#3374#3551#0" expanded="false" />
+            <element signature="e#3946#4145#0" expanded="false" />
+            <element signature="e#4373#4752#0" expanded="false" />
+            <element signature="e#4978#5213#0" expanded="false" />
+            <element signature="e#5422#5563#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/lmv.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49197862" vertical-offset="3066" max-vertical-offset="4726">
+          <caret line="297" column="31" selection-start-line="297" selection-start-column="31" selection-end-line="297" selection-end-column="31" />
+          <folding>
+            <element signature="e#1530#2040#0" expanded="false" />
+            <element signature="e#2114#2703#0" expanded="false" />
+            <element signature="e#2763#4039#0" expanded="false" />
+            <element signature="e#9828#10480#0" expanded="false" />
+            <element signature="e#10529#11068#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/lmv-projects.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.57687074" vertical-offset="596" max-vertical-offset="1751">
+          <caret line="79" column="10" selection-start-line="79" selection-start-column="10" selection-end-line="79" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/credentials.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36363637" vertical-offset="0" max-vertical-offset="748">
+          <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
           <folding />
         </state>
       </provider>

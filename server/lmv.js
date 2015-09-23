@@ -148,18 +148,18 @@ Lmv.prototype.singleUpload =function (filename) {
 	var serverFile =path.normalize (__dirname + '/../' + filename) ;
 	var localFile =path.basename (filename) ;
 
-	var file =fs.readFile (serverFile, function (err, data) {
-		if ( err )
-			return (self.emit ('fail', err)) ;
+	var readStream =fs.createReadStream (serverFile) ;
+	var endpoint =util.format (config.putFileUploadEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
+	var total =fs.statSync (serverFile).size ;
 
-		var endpoint =util.format (config.putFileUploadEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
+	readStream.pipe ( // pipe is better since it avoids loading all in memory
 		unirest.put (endpoint)
 			.headers ({
 				'Accept': 'application/json',
 				'Content-Type': 'application/octet-stream',
-				'Authorization': ('Bearer ' + self.accessToken)
+				'Authorization': ('Bearer ' + self.accessToken),
+				'Content-Length': total // required from stream
 			})
-			.send (data)
 			.end (function (response) {
 				try {
 					if ( response.statusCode != 200 )
@@ -168,9 +168,36 @@ Lmv.prototype.singleUpload =function (filename) {
 				} catch ( err ) {
 					self.emit ('fail', err) ;
 				}
-			})
-		;
-	}) ;
+			}
+		)
+	) ;
+
+	// The read file version
+
+	//var file =fs.readFile (serverFile, function (err, data) {
+	//	if ( err )
+	//		return (self.emit ('fail', err)) ;
+	//
+	//	var endpoint =util.format (config.putFileUploadEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
+	//	unirest.put (endpoint)
+	//		.headers ({
+	//			'Accept': 'application/json',
+	//			'Content-Type': 'application/octet-stream',
+	//			'Authorization': ('Bearer ' + self.accessToken)
+	//			// 'Content-Length' // not required here
+	//		})
+	//		.send (data)
+	//		.end (function (response) {
+	//			try {
+	//				if ( response.statusCode != 200 )
+	//					throw response ;
+	//				try { self.emit ('success', response.body) ; } catch ( err ) {}
+	//			} catch ( err ) {
+	//				self.emit ('fail', err) ;
+	//			}
+	//		})
+	//	;
+	//}) ;
 	return (this) ;
 } ;
 
@@ -189,40 +216,74 @@ Lmv.prototype.resumableUpload =function (filename) {
 		var endpoint =util.format (config.putFileUploadResumableEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
 		var sessionId ='models-autodesk-io-' + uid.token () ;
 
+		// pipe is better since it avoids loading all in memory
 		var fctChunks =function (n, chunkSize) {
 			return (function (callback) {
-				fs.open (serverFile, 'r', function (err, fd) {
-					if ( err )
-						return (callback (err, null)) ;
-					var buffer =new Buffer (chunkSize) ;
-					fs.read (fd, buffer, 0, chunkSize, n * chunkSize, function (err, bytesRead, buff) {
-						var contentRange ='bytes '
-							+ (n * chunkSize) + '-'
-							+ (n * chunkSize + bytesRead - 1) + '/'
-							+ total ;
-						unirest.put (endpoint)
-							.headers ({
-								'Accept': 'application/json',
-								'Content-Type': 'application/octet-stream',
-								'Authorization': ('Bearer ' + self.accessToken),
-								'Content-Range': contentRange,
-								'Session-Id': sessionId
-							})
-							.send (buff.slice (0, bytesRead))
-							.end (function (response) {
-								try {
-									if ( response.statusCode != 200 && response.statusCode != 202 )
-										throw response ;
-									callback (null, response.body) ;
-								} catch ( err ) {
-									callback (err, null) ;
-								}
-							})
-						;
-					}) ;
-				}) ;
+				var start =n * chunkSize ;
+				var end =Math.min (total, (n + 1) * chunkSize) - 1 ;
+				var contentRange ='bytes '
+					+ start + '-'
+					+ end + '/'
+					+ total ;
+				var readStream =fs.createReadStream (serverFile, { 'start': start, 'end': end }) ;
+				readStream.pipe (
+					unirest.put (endpoint)
+						.headers ({
+							'Accept': 'application/json',
+							'Content-Type': 'application/octet-stream',
+							'Authorization': ('Bearer ' + self.accessToken),
+							'Content-Range': contentRange,
+							'Session-Id': sessionId
+						})
+						.end (function (response) {
+							try {
+								if ( response.statusCode != 200 && response.statusCode != 202 )
+									throw response ;
+								callback (null, response.body) ;
+							} catch ( err ) {
+								callback (err, null) ;
+							}
+						}
+					)
+				)
 			}) ;
 		} ;
+
+		// The read buffer option
+		//var fctChunks =function (n, chunkSize) {
+		//	return (function (callback) {
+		//		fs.open (serverFile, 'r', function (err, fd) {
+		//			if ( err )
+		//				return (callback (err, null)) ;
+		//			var buffer =new Buffer (chunkSize) ;
+		//			fs.read (fd, buffer, 0, chunkSize, n * chunkSize, function (err, bytesRead, buff) {
+		//				var contentRange ='bytes '
+		//					+ (n * chunkSize) + '-'
+		//					+ (n * chunkSize + bytesRead - 1) + '/'
+		//					+ total ;
+		//				unirest.put (endpoint)
+		//					.headers ({
+		//						'Accept': 'application/json',
+		//						'Content-Type': 'application/octet-stream',
+		//						'Authorization': ('Bearer ' + self.accessToken),
+		//						'Content-Range': contentRange,
+		//						'Session-Id': sessionId
+		//					})
+		//					.send (buff.slice (0, bytesRead))
+		//					.end (function (response) {
+		//						try {
+		//							if ( response.statusCode != 200 && response.statusCode != 202 )
+		//								throw response ;
+		//							callback (null, response.body) ;
+		//						} catch ( err ) {
+		//							callback (err, null) ;
+		//						}
+		//					})
+		//				;
+		//			}) ;
+		//		}) ;
+		//	}) ;
+		//} ;
 
 		var fctChunksArray =Array.apply (null, { length: nbChunks }).map (Number.call, Number) ;
 		for ( var i =0 ; i < fctChunksArray.length ; i++ )
