@@ -362,6 +362,31 @@ Lmv.prototype.status =function (urn, params) {
 	return (this) ;
 } ;
 
+Lmv.prototype.all =function (urn, params) {
+    var self =this ;
+    params =params || {} ;
+
+    var endpoint =util.format (config.getAllEndPoint, urn) ;
+    unirest.get (endpoint)
+        .headers ({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': ('Bearer ' + self.accessToken)
+    })
+        .query (params)
+        .end (function (response) {
+        try {
+            if ( response.statusCode != 200 )
+                throw response ;
+            try { self.emit ('success', response.body) ; } catch ( err ) {}
+        } catch ( err ) {
+            self.emit ('fail', err) ;
+        }
+    })
+    ;
+    return (this) ;
+} ;
+
 var router =express.Router () ;
 router.Lmv =Lmv ;
 module.exports =router ;

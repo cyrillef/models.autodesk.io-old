@@ -31,7 +31,7 @@ router.use (bodyParser.json ()) ;
 router.get ('/translate/:urn/progress', function (req, res) {
 	var accessToken =req.query.accessToken ;
 	var urn =req.params.urn ;
-	new lmv.Lmv ('', accessToken).status (urn)
+	new lmv.Lmv ('', accessToken).all (urn)
 		.on ('success', function (data) {
 			res.json (data) ;
 		})
