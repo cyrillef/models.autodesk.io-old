@@ -1,14 +1,14 @@
 {
-  "name": "adn-nodejs-host-sample",
+  "name": "models.autodesk.io",
   "description": "A Node.js server to create Autodesk View and Data API viewables without the need to create a server yourself",
   "homepage": "http://around-the-corner.typepad.com/",
   "version": "1.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cyrillef/workflow-node.js-host-view.and.data.api.git"
+    "url": "https://github.com/cyrillef/models.autodesk.io"
   },
   "bugs": {
-    "url": "https://github.com/cyrillef/workflow-node.js-host-view.and.data.api/issues"
+    "url": "https://github.com/cyrillef/models.autodesk.io/issues"
   },
   "author": "Cyrille Fauvel",
   "contributors": [

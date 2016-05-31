@@ -8,15 +8,15 @@
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://opensource.org/licenses/MIT)
 
 
-<b>Note:</b> For hosting this sample, you do not need any oAuth credential. But anyone using the hosted sample will need
-a valid oAuth credential for the translation / extraction portion. Visit this [page](https://developer.autodesk.com) for
+<b>Note:</b> For hosting this sample, you do not need any credentials. But anyone using the sample will need
+valid credentials for the translation / extraction process. Visit [the Forge WEB site](https://developer.autodesk.com) for
 instructions to get on-board.
 
 
 ## Live demo at
-http://models.autodesk.io/
+https://models.autodesk.io/
 
-[![](www/images/app.png)](http://models.autodesk.io/)
+[![](www/images/app.png)](https://models.autodesk.io/)
 
 
 ## Motivation
@@ -31,8 +31,8 @@ This sample will go through all the required steps.
 
 ## Description
 
-The workflow-node.js-host-view.and.data.api sample exercises and demonstrates the Autodesk View and Data API authorization,
-translation processes mentioned in the Quick Start guide. It provides you a quick way to get file ready for viewing.
+This sample exercises and demonstrates the Autodesk View and Data API authorization, and the translation process
+mentioned in the Quick Start guide. It provides you a quick way to get file ready for viewing on your own account.
 
 It closely follows the steps described in the documentation:
 
@@ -42,7 +42,7 @@ In order to make use of this sample, you need to register your consumer key:
 
 * https://developer.autodesk.com > My Apps
 
-This provides the credentials to supply to the http requests on the Autodesk server.
+This provides the credentials to supply to the https requests on the Autodesk server.
 
 
 ## Dependencies
@@ -79,8 +79,9 @@ This sample is dependent of Node.js and few Node.js extensions which would updat
 
 The sample was created using Node.js and javascript.
 
-Live version at: http://models.autodesk.io/
+### Deploy on Heroku
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ### Setup
 1. Download and install [Node.js](http://nodejs.org/) (that will install npm as well)
