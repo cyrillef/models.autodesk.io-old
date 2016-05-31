@@ -1,6 +1,6 @@
-# workflow-node.js-host-view.and.data.api sample
+# models.autodesk.io sample
 
-[![build status](https://api.travis-ci.org/cyrillef/models.autodesk.io.png)](https://travis-ci.org/cyrillef/models.autodesk.io)
+[![build status](https://api.travis-ci.org/cyrillef/workflow-node.js-host-view.and.data.api.png)](https://travis-ci.org/cyrillef/models.autodesk.io)
 [![Node.js](https://img.shields.io/badge/Node.js-0.12.4-blue.svg)](https://nodejs.org/)
 [![npm](https://img.shields.io/badge/npm-2.10.1-blue.svg)](https://www.npmjs.com/)
 [![LMV](https://img.shields.io/badge/View%20%26%20Data%20API-v2.5-green.svg)](http://developer-autodesk.github.io/)
