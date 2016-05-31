@@ -149,7 +149,8 @@ Lmv.prototype.singleUpload =function (filename) {
 	var localFile =path.basename (filename) ;
 
 	var readStream =fs.createReadStream (serverFile) ;
-	var endpoint =util.format (config.putFileUploadEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
+	//var endpoint =util.format (config.putFileUploadEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
+    var endpoint =util.format (config.putFileUploadEndPoint, self.bucket, encodeURIComponent (localFile)) ;
 	var total =fs.statSync (serverFile).size ;
 
 	readStream.pipe ( // pipe is better since it avoids loading all in memory
@@ -178,7 +179,8 @@ Lmv.prototype.singleUpload =function (filename) {
 	//	if ( err )
 	//		return (self.emit ('fail', err)) ;
 	//
-	//	var endpoint =util.format (config.putFileUploadEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
+	//	//var endpoint =util.format (config.putFileUploadEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
+    //  var endpoint =util.format (config.putFileUploadEndPoint, self.bucket, encodeURIComponent (localFile)) ;
 	//	unirest.put (endpoint)
 	//		.headers ({
 	//			'Accept': 'application/json',
@@ -213,7 +215,8 @@ Lmv.prototype.resumableUpload =function (filename) {
 		var total =stats.size ;
 		var chunkSize =config.fileResumableChunk * 1024 * 1024 ;
 		var nbChunks =Math.round (0.5 + total / chunkSize) ;
-		var endpoint =util.format (config.putFileUploadResumableEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
+		//var endpoint =util.format (config.putFileUploadResumableEndPoint, self.bucket, localFile.replace (/ /g, '+')) ;
+        var endpoint =util.format (config.putFileUploadResumableEndPoint, self.bucket, encodeURIComponent (localFile)) ;
 		var sessionId ='models-autodesk-io-' + uid.token () ;
 
 		// pipe is better since it avoids loading all in memory

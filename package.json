@@ -2,7 +2,7 @@
   "name": "adn-nodejs-host-sample",
   "description": "A Node.js server to create Autodesk View and Data API viewables without the need to create a server yourself",
   "homepage": "http://around-the-corner.typepad.com/",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/cyrillef/workflow-node.js-host-view.and.data.api.git"
@@ -49,7 +49,8 @@
     "request": ">= 2.55.0",
     "serve-favicon": ">= 0.0.2",
     "unirest": ">= 0.4.0",
-    "util": ">= 0.10.3"
+    "util": ">= 0.10.3",
+    "view-and-data": "^2.0.0"
   },
   "devDependencies": {
     "mocha": ">= 2.2.5",

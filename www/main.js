@@ -196,9 +196,9 @@ function translateProgress (urn) {
 
 function translatedItem (id, name, urn) {
 	$('#translated').append ('<div class="list-group-item row" id="' + id + '">'
-		+ '<div class="col-md-3">' + name + '</div>'
+		+ '<div class="col-md-3">' + decodeURIComponent (name) + '</div>'
 		+ '<div class="col-md-7">'
-		+ '<input type="text" class="form-control" value="' + urn + '" readonly="true" />'
+		+ '<input type="text" class="form-control" value="' + urn + '" readonly="true" onClick="this.setSelectionRange (0, this.value.length)" oncopy="this.setSelectionRange (0, this.value.length)" />'
 		+ '</div>'
 		+ '<div class="col-md-1">'
 		+ '<button class="form-control copy" data-clipboard-text="' + urn + '" title="Copy the URN to clipboard"><img src="/images/copy.png" /></button>'

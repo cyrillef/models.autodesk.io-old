@@ -29,7 +29,7 @@ var multipartMiddleware =multipart () ;
 
 router.post ('/file', multipartMiddleware, function (req, res) {
 	req
-		.pipe (fs.createWriteStream ('./uploads/' + req.headers ['x-file-name']))
+		.pipe (fs.createWriteStream ('./uploads/' + decodeURIComponent (req.headers ['x-file-name'])))
 		.on ('finish', function (err) {
 			res.end () ;
 		})

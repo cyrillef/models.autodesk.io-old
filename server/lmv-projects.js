@@ -25,6 +25,9 @@ var fs =require ('fs') ;
 var async =require ('async') ;
 var lmv =require ('./lmv') ;
 
+//var LmvConfig =require ('../node_modules/view-and-data/config-view-and-data') ;
+//var Lmv =require ('view-and-data') ;
+
 var router =express.Router () ;
 router.use (bodyParser.json ()) ;
 
@@ -39,7 +42,14 @@ router.get ('/translate/:urn/progress', function (req, res) {
 			res.status (404).end () ;
 		})
 	;
-}) ;
+/*    var lmv =new Lmv (LmvConfig, accessToken) ;
+    lmv.getViewable (urn, 'all')
+        .then (function (response) {
+            res.json (data) ;
+        }).catch (function (e) {
+            res.status (404).end () ;
+        }) ;
+*/}) ;
 
 router.post ('/translate', function (req, res) {
 	var accessToken =req.body.accessToken ;
@@ -67,6 +77,7 @@ router.post ('/translate', function (req, res) {
 
 		function (arg1, callbacks2) {
 			console.log ('async upload') ;
+
 			new lmv.Lmv (bucket, accessToken).uploadFile (filename)
 				.on ('success', function (data) {
 					console.log (filename + ' uploaded.') ;
